@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import NextTopLoader from "nextjs-toploader";
+import SessionWrapper from "@/context/SessionWrapper";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -28,9 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <SessionWrapper>
+        <body className={`${poppins.className} bg-zinc-200`}>
+          <NextTopLoader color="blue" />
+
+          {children}
+          <Toaster richColors />
+        </body>
+      </SessionWrapper>
     </html>
   );
 }
