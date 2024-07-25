@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
+import { ThemeProvider } from "next-themes";
 import SessionWrapper from "@/context/SessionWrapper";
 
 const poppins = Poppins({
@@ -27,14 +28,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SessionWrapper>
-        <body className={`${poppins.className} bg-zinc-200`}>
-          <NextTopLoader color="blue" />
+      <body className={`${poppins.className} bg-background `}>
+        <SessionWrapper>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextTopLoader color="blue" />
 
-          {children}
-          <Toaster richColors />
-        </body>
-      </SessionWrapper>
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
+        </SessionWrapper>
+      </body>
     </html>
   );
 }

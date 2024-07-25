@@ -4,18 +4,18 @@ import defaultAvatarImage from "@/assets/avatar-placeholder.png";
 import { cn } from "@/lib/utils";
 
 type ImageAvatarPropsType = {
-  size?: number;
   className?: string;
-  imgUrl?: string;
+  imgUrl?: string | undefined | null;
 };
 
-const ImageAvatar = ({ size, className, imgUrl }: ImageAvatarPropsType) => {
+const ImageAvatar = ({ className, imgUrl }: ImageAvatarPropsType) => {
   return (
     <Image
       src={imgUrl || defaultAvatarImage}
       alt="avatar"
-      className={cn(" rounded-full object-cover", className)}
+      className={cn("rounded-full object-cover", className)}
       fill
+      sizes="(max-width: 768px) 100vw, 33vw"
     />
   );
 };

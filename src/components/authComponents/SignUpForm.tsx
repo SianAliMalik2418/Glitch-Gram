@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { signUpAction } from "@/app/(pages)/(authPages)/signup/actions";
 import { ButtonLoading } from "../ui/buttonWithLoading";
 import { toast } from "sonner";
 
@@ -24,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import PasswordInput from "../ui/PasswordInput";
+import { signUpAction } from "@/actions/SignUpAction";
 
 const SignUpForm = () => {
   const [isPending, startTransition] = useTransition();
