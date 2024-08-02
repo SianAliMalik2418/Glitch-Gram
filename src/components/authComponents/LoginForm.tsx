@@ -40,8 +40,6 @@ const LoginForm = () => {
         password: data.password,
       });
 
-      console.log(response);
-
       if (response && !response.ok) {
         toast.error(response?.error);
       } else {
@@ -90,7 +88,7 @@ const LoginForm = () => {
             <ButtonLoading />
           ) : (
             <Button type="submit" className="w-full bg-primary py-3">
-              Sign Up
+              Sign In
             </Button>
           )}
         </form>

@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "next-themes";
 import SessionWrapper from "@/context/SessionWrapper";
+import ReactQueryProvider from "@/context/ReactQueryProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,20 +29,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-background `}>
-        <SessionWrapper>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextTopLoader color="blue" />
+      <body className={`${poppins.className} bg-background`}>
+        <ReactQueryProvider>
+          <SessionWrapper>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NextTopLoader color="blue" />
 
-            {children}
-            <Toaster richColors />
-          </ThemeProvider>
-        </SessionWrapper>
+              {children}
+              <Toaster richColors />
+            </ThemeProvider>
+          </SessionWrapper>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -1,4 +1,3 @@
-import { ApiResponseType } from "@/types/types";
 import { NextResponse } from "next/server";
 
 export const ResponseJson = (

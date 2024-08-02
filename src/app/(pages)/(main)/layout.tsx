@@ -7,13 +7,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen flex-col  items-center ">
+    <div className="flex min-h-screen flex-col ">
       <Navbar />
-      <div className="mx-auto flex min-h-screen w-full max-w-[75rem]  ">
-        <MenuBar className="sticky top-[7rem] ml-5 hidden h-fit space-y-5 rounded-xl border-r bg-card px-10 py-7 text-lg shadow-lg sm:block   " />
+      <div className="mx-auto flex min-h-screen w-full  sm:max-w-[75rem] ">
+        <MenuBar className="sticky top-[7rem] ml-5 hidden h-fit space-y-5 rounded-xl border-r bg-card px-10 py-7 text-lg shadow-lg lg:block" />
         {children}
       </div>
-      <MenuBar className="sticky bottom-0 flex h-fit items-center justify-start gap-5 border-r bg-card px-5 py-7 text-lg shadow-sm sm:hidden" />
+      <MenuBar className="sticky bottom-0 flex h-fit w-full items-center justify-center gap-5 border-r bg-card px-5 py-7 text-lg shadow-sm lg:hidden" />
     </div>
   );
 }

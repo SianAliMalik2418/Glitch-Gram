@@ -11,7 +11,7 @@ type PostProps = {
   userImage: string;
   createdAt: Date;
   postId: string;
-  userId: ObjectId;
+  userId: string;
 };
 
 const Post = ({
@@ -23,7 +23,7 @@ const Post = ({
   userId,
 }: PostProps) => {
   return (
-    <div className="mt-7 flex w-full cursor-pointer flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm transition-all duration-100">
+    <div className="mt-7 flex w-[22rem] cursor-pointer flex-col gap-3 rounded-2xl bg-card p-5 shadow-sm transition-all duration-100 sm:w-[25rem] md:w-full">
       {/* userDetailsDiv */}
       <div className="flex w-full items-center gap-3">
         <Link href={`/user/${userId}`}>
@@ -38,7 +38,7 @@ const Post = ({
             </span>
           </Link>
           <span className="text-xs text-muted">
-            {createFormmatedDate(createdAt)}
+            {/* {createFormmatedDate(createdAt)} */}
           </span>
         </div>
       </div>

@@ -29,6 +29,8 @@ type NavbarDropDownProps = {
 export function NavbarDropDown({ imgUrl, username }: NavbarDropDownProps) {
   const { theme, setTheme } = useTheme();
 
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
