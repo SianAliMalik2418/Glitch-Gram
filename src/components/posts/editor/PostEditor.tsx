@@ -8,10 +8,13 @@ import ImageAvatar from "@/components/Navbar/ImageAvatar";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import "./styles.css";
-import { CreatePostAction } from "@/actions/CreatePostAction";
+import { useCreatePostMutation } from "../../../mutations/post-mutations";
+import { ButtonLoading } from "@/components/ui/buttonWithLoading";
 
 const PostEditor = () => {
   const { data: session } = useSession();
+
+  const mutation = useCreatePostMutation();
 
   const editor = useEditor({
     extensions: [
@@ -34,9 +37,11 @@ const PostEditor = () => {
 
   const handleCreatePost = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await CreatePostAction(input);
-    console.log(response);
-    editor?.commands.clearContent();
+    mutation.mutate(input, {
+      onSuccess: () => {
+        editor?.commands.clearContent();
+      },
+    });
   };
 
   return (
@@ -58,9 +63,15 @@ const PostEditor = () => {
       </div>
 
       <div className="flex w-full items-center justify-end">
-        <Button disabled={!input.trim()} className="w-fit min-w-20">
-          Post
-        </Button>
+        {mutation.isPending ? (
+          <div className="min-w-28 max-w-28">
+            <ButtonLoading classname="w-full" />
+          </div>
+        ) : (
+          <Button disabled={!input.trim()} className="w-fit min-w-20">
+            Post
+          </Button>
+        )}
       </div>
     </form>
   );

@@ -17,7 +17,7 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (pathName.startsWith("/profile") && !token) {
+  if ( (pathName.startsWith("/profile") || pathName === "/") && !token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 };

@@ -8,6 +8,7 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import PostsSkeleton from "./PostsSkeleton";
 
 const ForYouFeed = () => {
   const { ref, inView } = useInView();
@@ -44,12 +45,12 @@ const ForYouFeed = () => {
   }, [inView, hasNextPage, fetchNextPage]);
 
   if (status === "pending") {
-    return <Loader2 className="mx-auto h-[70vh] animate-spin" />;
+    return <PostsSkeleton />;
   }
 
   if (status === "error") {
     return (
-      <p className="mx-auto h-[70vh] text-destructive">
+      <p className="mx-auto mt-5 h-[70vh] text-center text-destructive">
         Something went wrong while fetching posts.
       </p>
     );
@@ -75,12 +76,15 @@ const ForYouFeed = () => {
       {isFetchingNextPage ? (
         <Loader2 className="mx-auto my-10 animate-spin" />
       ) : (
-        <Button ref={ref} className="opacity-0">
-          Load More
-        </Button>
+        <div ref={ref}></div>
       )}
 
-      {!hasNextPage && <p className="text-center">All set :)</p>}
+      {!hasNextPage && (
+        <p className="mt-5 text-center">
+          <span className="text-primary">You have scrolled till the end!</span>
+          <br /> You can rest now :)
+        </p>
+      )}
     </>
   );
 };

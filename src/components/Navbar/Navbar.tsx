@@ -9,9 +9,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import SearchBar from "./SearchBar";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "../ui/skeleton";
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <div className="sticky top-0 z-10 w-full bg-card py-7 shadow-sm">
@@ -26,20 +27,30 @@ const Navbar = () => {
           <SearchBar />
         </div>
 
-        {session ? (
+        {status === "loading" ? (
           <div className="mr-5 flex w-fit items-center justify-end md:mr-2 md:flex-1">
-            <NavbarDropDown
-              imgUrl={session?.user?.image}
-              username={session?.user?.username}
-            />
+            <Skeleton className="size-10 rounded-full"></Skeleton>
           </div>
         ) : (
-          <Link
-            href={"/login"}
-            className="mr-5 flex w-fit items-center justify-end md:mr-2 md:flex-1"
-          >
-            <Button className="bg-primary py-4 font-semibold">Login Now</Button>
-          </Link>
+          <>
+            {session ? (
+              <div className="mr-5 flex w-fit items-center justify-end md:mr-2 md:flex-1">
+                <NavbarDropDown
+                  imgUrl={session?.user?.image}
+                  username={session?.user?.username}
+                />
+              </div>
+            ) : (
+              <Link
+                href={"/login"}
+                className="mr-5 flex w-fit items-center justify-end md:mr-2 md:flex-1"
+              >
+                <Button className="bg-primary py-4 font-semibold">
+                  Login Now
+                </Button>
+              </Link>
+            )}
+          </>
         )}
       </div>
     </div>

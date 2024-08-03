@@ -6,9 +6,8 @@ export type PostModelType = Document & PostType;
 const postSchema: Schema<PostModelType> = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: [true, "User id for post is required"],
-      ref: "users",
     },
 
     userName: {
